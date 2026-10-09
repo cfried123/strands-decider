@@ -1092,6 +1092,49 @@ def bench_items(seed: int = 0) -> list[dict]:
     return items
 
 
+def question_for(fam: Family) -> dict:
+    """The serving-API question for a family, exactly as DTR-Bench poses it."""
+    ex = Example(
+        kind=fam.kind,
+        state={},
+        instructions=fam.instructions[0],
+        options=options_for(fam),
+        label=0,
+        task=fam.task,
+    )
+    return ex.to_question().model_dump(exclude_none=True)
+
+
+def catalog() -> dict:
+    """What an app needs to ask the decider about a new scenario: per determination
+    type, the question, its governing DTR excerpt and citation, and the option labels."""
+    sections = {
+        "dtr_class_of_service": "102.A",
+        "dtr_travel_mode": "102.C",
+        "dtr_fare_eligibility": "103.E",
+        "dtr_cpp_exception": "103.E",
+        "dtr_foreign_carrier": "103.F",
+        "dtr_contractor_airlift": "103.N",
+        "dtr_booking_policy": "102.K",
+        "dtr_rental_use": "106.B",
+        "dtr_ship_travel": "107.A",
+        "dtr_compliance_risk": "102.A",
+    }
+    out = {}
+    for task, fam in FAMILIES.items():
+        cite, text = EXCERPTS[sections[task]]
+        out[task] = {
+            "kind": fam.kind,
+            "section": sections[task],
+            "dtr_citation": cite,
+            "dtr_excerpt": text,
+            "question": question_for(fam),
+            "option_names": [o for o, _ in options_for(fam)],
+            "holdout": task in HOLDOUT_TASKS,
+        }
+    return {"source": SOURCE, "tasks": out}
+
+
 def main(argv: list[str] | None = None) -> None:
     import argparse
     import json
@@ -1099,7 +1142,12 @@ def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description="Write the DTR-Bench gold set as JSONL.")
     ap.add_argument("--out", default="data/dtr_bench.jsonl")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--catalog", help="Also write the app's question catalog (JSON) here.")
     args = ap.parse_args(argv)
+    if args.catalog:
+        with open(args.catalog, "w", encoding="utf-8") as fh:
+            json.dump(catalog(), fh, ensure_ascii=False, indent=1)
+        print(f"wrote catalog -> {args.catalog}")
     items = bench_items(args.seed)
     with open(args.out, "w", encoding="utf-8") as fh:
         for it in items:

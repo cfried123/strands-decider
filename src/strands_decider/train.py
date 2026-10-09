@@ -450,6 +450,9 @@ def train(cfg: TrainConfig) -> str:
         model.config.ordinal_smoothing = cfg.ordinal_smoothing
         model.config.temperature = 1.0
         model.config.temperature_by_kind = {}
+        # The collator must build batches for the loaded head, not the config defaults.
+        for key in ("num_slots", "head_type", "pointer_dim", "force_bos", "host_embeddings"):
+            setattr(cfg, key, getattr(model.config, key))
         model.head.train()
         for p in model.head.parameters():
             p.requires_grad_(True)
@@ -459,7 +462,9 @@ def train(cfg: TrainConfig) -> str:
         )
         if cfg.freeze_torso:
             model.freeze_torso()
-    if cfg.head_init == "lm_head":
+    if cfg.finetune_from:
+        pass  # keep the trained head
+    elif cfg.head_init == "lm_head":
         seeded = model.init_head_from_lm_head()
         print(f"[strands-decider] head seeded from lm_head rows for {seeded} slots")
     elif cfg.head_init != "random":
