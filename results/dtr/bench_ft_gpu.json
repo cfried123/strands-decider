@@ -1,0 +1,2204 @@
+{
+ "checkpoint": "/tmp/dtr/ckpt",
+ "metrics": {
+  "all": {
+   "n": 142,
+   "strict_accuracy": 0.9788732394366197,
+   "forced_accuracy": 0.9847328244274809,
+   "coverage": 0.9770992366412213,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.027157251908396934,
+   "mean_latency_ms": 73.50900725350584
+  },
+  "choice": {
+   "n": 43,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": null,
+   "ece": 0.00039534883720937497,
+   "mean_latency_ms": 83.02613967442423
+  },
+  "dtr_booking_policy": {
+   "n": 12,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.0007818181818181058,
+   "mean_latency_ms": 67.67399508339622
+  },
+  "dtr_class_of_service": {
+   "n": 15,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": null,
+   "ece": 2.666666666661932e-05,
+   "mean_latency_ms": 110.35736846670261
+  },
+  "dtr_compliance_risk": {
+   "n": 15,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": null,
+   "ece": 0.0931799999999999,
+   "mean_latency_ms": 71.06527766657867
+  },
+  "dtr_contractor_airlift": {
+   "n": 8,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.017585714285714316,
+   "mean_latency_ms": 66.84535699992011
+  },
+  "dtr_cpp_exception": {
+   "n": 14,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.0003250000000000197,
+   "mean_latency_ms": 72.78740278564199
+  },
+  "dtr_fare_eligibility": {
+   "n": 14,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.0023454545454545395,
+   "mean_latency_ms": 71.14822449999077
+  },
+  "dtr_foreign_carrier": {
+   "n": 14,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.0006333333333333746,
+   "mean_latency_ms": 68.41702750002047
+  },
+  "dtr_provision_routing": {
+   "n": 16,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": null,
+   "ece": 0.0,
+   "mean_latency_ms": 68.88489118742314
+  },
+  "dtr_rental_use": {
+   "n": 12,
+   "strict_accuracy": 0.9166666666666666,
+   "forced_accuracy": 1.0,
+   "coverage": 0.9090909090909091,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.06543636363636364,
+   "mean_latency_ms": 66.39540933330561
+  },
+  "dtr_ship_travel": {
+   "n": 10,
+   "strict_accuracy": 0.8,
+   "forced_accuracy": 0.7777777777777778,
+   "coverage": 0.7777777777777778,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.13934444444444444,
+   "mean_latency_ms": 68.56429829999797
+  },
+  "dtr_travel_mode": {
+   "n": 12,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": null,
+   "ece": 0.001383333333333403,
+   "mean_latency_ms": 67.71710166674438
+  },
+  "holdout": {
+   "n": 22,
+   "strict_accuracy": 0.8636363636363636,
+   "forced_accuracy": 0.9,
+   "coverage": 0.85,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.09869500000000006,
+   "mean_latency_ms": 67.3812679545294
+  },
+  "in_domain": {
+   "n": 120,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.01426756756756755,
+   "mean_latency_ms": 74.63242612498486
+  },
+  "noul": {
+   "n": 84,
+   "strict_accuracy": 0.9642857142857143,
+   "forced_accuracy": 0.9726027397260274,
+   "coverage": 0.958904109589041,
+   "selective_accuracy": 1.0,
+   "abstain_recall": 1.0,
+   "ece": 0.02935479452054792,
+   "mean_latency_ms": 69.07352213093938
+  },
+  "score": {
+   "n": 15,
+   "strict_accuracy": 1.0,
+   "forced_accuracy": 1.0,
+   "coverage": 1.0,
+   "selective_accuracy": 1.0,
+   "abstain_recall": null,
+   "ece": 0.0931799999999999,
+   "mean_latency_ms": 71.06527766657867
+  }
+ },
+ "predictions": {
+  "dtr_class_of_service-000": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 1.0,
+   "latency_ms": 701.6662310002175,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 1.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-001": {
+   "decision": "economy_plus",
+   "argmax": "economy_plus",
+   "confidence": 1.0,
+   "latency_ms": 68.92432199992982,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_plus",
+    "probabilities": {
+     "economy_coach": 0.0,
+     "economy_plus": 1.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-002": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 0.9998,
+   "latency_ms": 67.83481399997981,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 0.9998,
+     "economy_plus": 0.0001,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 0.9998
+   }
+  },
+  "dtr_class_of_service-003": {
+   "decision": "premium_economy",
+   "argmax": "premium_economy",
+   "confidence": 1.0,
+   "latency_ms": 67.6389659997767,
+   "answer": {
+    "type": "choice",
+    "choice": "premium_economy",
+    "probabilities": {
+     "economy_coach": 0.0,
+     "economy_plus": 0.0,
+     "premium_economy": 1.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-004": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 0.9999,
+   "latency_ms": 67.07883799981573,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 0.9999,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 0.9998
+   }
+  },
+  "dtr_class_of_service-005": {
+   "decision": "premium_class",
+   "argmax": "premium_class",
+   "confidence": 1.0,
+   "latency_ms": 67.7219200001673,
+   "answer": {
+    "type": "choice",
+    "choice": "premium_class",
+    "probabilities": {
+     "economy_coach": 0.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 1.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-006": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 1.0,
+   "latency_ms": 67.71341000012399,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 1.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-007": {
+   "decision": "personal_upgrade",
+   "argmax": "personal_upgrade",
+   "confidence": 1.0,
+   "latency_ms": 68.81377900026564,
+   "answer": {
+    "type": "choice",
+    "choice": "personal_upgrade",
+    "probabilities": {
+     "economy_coach": 0.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 1.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-008": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 1.0,
+   "latency_ms": 69.00030399992829,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 1.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-009": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 1.0,
+   "latency_ms": 69.01684500007832,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 1.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-010": {
+   "decision": "economy_plus",
+   "argmax": "economy_plus",
+   "confidence": 1.0,
+   "latency_ms": 68.2237470000473,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_plus",
+    "probabilities": {
+     "economy_coach": 0.0,
+     "economy_plus": 1.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-011": {
+   "decision": "premium_economy",
+   "argmax": "premium_economy",
+   "confidence": 1.0,
+   "latency_ms": 68.06271300001754,
+   "answer": {
+    "type": "choice",
+    "choice": "premium_economy",
+    "probabilities": {
+     "economy_coach": 0.0,
+     "economy_plus": 0.0,
+     "premium_economy": 1.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-012": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 0.9999,
+   "latency_ms": 67.43989999995392,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 0.9999,
+     "economy_plus": 0.0001,
+     "premium_economy": 0.0001,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 0.9998
+   }
+  },
+  "dtr_class_of_service-013": {
+   "decision": "premium_class",
+   "argmax": "premium_class",
+   "confidence": 1.0,
+   "latency_ms": 67.80886300020939,
+   "answer": {
+    "type": "choice",
+    "choice": "premium_class",
+    "probabilities": {
+     "economy_coach": 0.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 1.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_class_of_service-014": {
+   "decision": "economy_coach",
+   "argmax": "economy_coach",
+   "confidence": 1.0,
+   "latency_ms": 68.41587500002788,
+   "answer": {
+    "type": "choice",
+    "choice": "economy_coach",
+    "probabilities": {
+     "economy_coach": 1.0,
+     "economy_plus": 0.0,
+     "premium_economy": 0.0,
+     "premium_class": 0.0,
+     "personal_upgrade": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_travel_mode-000": {
+   "decision": "commercial_air",
+   "argmax": "commercial_air",
+   "confidence": 0.9999,
+   "latency_ms": 67.29358500024318,
+   "answer": {
+    "type": "choice",
+    "choice": "commercial_air",
+    "probabilities": {
+     "commercial_air": 0.9999,
+     "military_airlift": 0.0,
+     "rail": 0.0,
+     "charter_bus": 0.0001
+    },
+    "confidence": 0.9998
+   }
+  },
+  "dtr_travel_mode-001": {
+   "decision": "military_airlift",
+   "argmax": "military_airlift",
+   "confidence": 1.0,
+   "latency_ms": 67.22668300017176,
+   "answer": {
+    "type": "choice",
+    "choice": "military_airlift",
+    "probabilities": {
+     "commercial_air": 0.0,
+     "military_airlift": 1.0,
+     "rail": 0.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_travel_mode-002": {
+   "decision": "military_airlift",
+   "argmax": "military_airlift",
+   "confidence": 1.0,
+   "latency_ms": 68.03913100020509,
+   "answer": {
+    "type": "choice",
+    "choice": "military_airlift",
+    "probabilities": {
+     "commercial_air": 0.0,
+     "military_airlift": 1.0,
+     "rail": 0.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_travel_mode-003": {
+   "decision": "rail",
+   "argmax": "rail",
+   "confidence": 0.9999,
+   "latency_ms": 67.97591899976396,
+   "answer": {
+    "type": "choice",
+    "choice": "rail",
+    "probabilities": {
+     "commercial_air": 0.0,
+     "military_airlift": 0.0,
+     "rail": 0.9999,
+     "charter_bus": 0.0
+    },
+    "confidence": 0.9999
+   }
+  },
+  "dtr_travel_mode-004": {
+   "decision": "charter_bus",
+   "argmax": "charter_bus",
+   "confidence": 0.9916,
+   "latency_ms": 67.20798300011666,
+   "answer": {
+    "type": "choice",
+    "choice": "charter_bus",
+    "probabilities": {
+     "commercial_air": 0.0037,
+     "military_airlift": 0.0029,
+     "rail": 0.0018,
+     "charter_bus": 0.9916
+    },
+    "confidence": 0.9888
+   }
+  },
+  "dtr_travel_mode-005": {
+   "decision": "commercial_air",
+   "argmax": "commercial_air",
+   "confidence": 1.0,
+   "latency_ms": 67.10250800006179,
+   "answer": {
+    "type": "choice",
+    "choice": "commercial_air",
+    "probabilities": {
+     "commercial_air": 1.0,
+     "military_airlift": 0.0,
+     "rail": 0.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_travel_mode-006": {
+   "decision": "commercial_air",
+   "argmax": "commercial_air",
+   "confidence": 1.0,
+   "latency_ms": 69.17444999999134,
+   "answer": {
+    "type": "choice",
+    "choice": "commercial_air",
+    "probabilities": {
+     "commercial_air": 1.0,
+     "military_airlift": 0.0,
+     "rail": 0.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 0.9999
+   }
+  },
+  "dtr_travel_mode-007": {
+   "decision": "military_airlift",
+   "argmax": "military_airlift",
+   "confidence": 1.0,
+   "latency_ms": 67.19863299986173,
+   "answer": {
+    "type": "choice",
+    "choice": "military_airlift",
+    "probabilities": {
+     "commercial_air": 0.0,
+     "military_airlift": 1.0,
+     "rail": 0.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_travel_mode-008": {
+   "decision": "military_airlift",
+   "argmax": "military_airlift",
+   "confidence": 1.0,
+   "latency_ms": 67.7187800001775,
+   "answer": {
+    "type": "choice",
+    "choice": "military_airlift",
+    "probabilities": {
+     "commercial_air": 0.0,
+     "military_airlift": 1.0,
+     "rail": 0.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_travel_mode-009": {
+   "decision": "rail",
+   "argmax": "rail",
+   "confidence": 1.0,
+   "latency_ms": 68.01588000007541,
+   "answer": {
+    "type": "choice",
+    "choice": "rail",
+    "probabilities": {
+     "commercial_air": 0.0,
+     "military_airlift": 0.0,
+     "rail": 1.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_travel_mode-010": {
+   "decision": "charter_bus",
+   "argmax": "charter_bus",
+   "confidence": 0.992,
+   "latency_ms": 67.50143299996125,
+   "answer": {
+    "type": "choice",
+    "choice": "charter_bus",
+    "probabilities": {
+     "commercial_air": 0.0035,
+     "military_airlift": 0.0028,
+     "rail": 0.0018,
+     "charter_bus": 0.992
+    },
+    "confidence": 0.9893
+   }
+  },
+  "dtr_travel_mode-011": {
+   "decision": "commercial_air",
+   "argmax": "commercial_air",
+   "confidence": 1.0,
+   "latency_ms": 68.15023500030293,
+   "answer": {
+    "type": "choice",
+    "choice": "commercial_air",
+    "probabilities": {
+     "commercial_air": 1.0,
+     "military_airlift": 0.0,
+     "rail": 0.0,
+     "charter_bus": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-000": {
+   "decision": "0",
+   "argmax": "0",
+   "confidence": 0.9062,
+   "latency_ms": 67.2854859999461,
+   "answer": {
+    "type": "score",
+    "score": 0.0978,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.9062,
+     "1": 0.0903,
+     "2": 0.0029,
+     "3": 0.0006
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-001": {
+   "decision": "0",
+   "argmax": "0",
+   "confidence": 0.9027,
+   "latency_ms": 67.30749600001218,
+   "answer": {
+    "type": "score",
+    "score": 0.099,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.9027,
+     "1": 0.0959,
+     "2": 0.001,
+     "3": 0.0004
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-002": {
+   "decision": "0",
+   "argmax": "0",
+   "confidence": 0.9423,
+   "latency_ms": 65.27881500005606,
+   "answer": {
+    "type": "score",
+    "score": 0.0601,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.9423,
+     "1": 0.0558,
+     "2": 0.0016,
+     "3": 0.0004
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-003": {
+   "decision": "0",
+   "argmax": "0",
+   "confidence": 0.906,
+   "latency_ms": 78.99844199982908,
+   "answer": {
+    "type": "score",
+    "score": 0.0992,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.906,
+     "1": 0.0895,
+     "2": 0.0037,
+     "3": 0.0008
+    },
+    "confidence": 0.9981
+   }
+  },
+  "dtr_compliance_risk-004": {
+   "decision": "1",
+   "argmax": "1",
+   "confidence": 0.9193,
+   "latency_ms": 68.93375199979346,
+   "answer": {
+    "type": "score",
+    "score": 1.0194,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0356,
+     "1": 0.9193,
+     "2": 0.0351,
+     "3": 0.0099
+    },
+    "confidence": 0.9868
+   }
+  },
+  "dtr_compliance_risk-005": {
+   "decision": "1",
+   "argmax": "1",
+   "confidence": 0.9339,
+   "latency_ms": 65.33751799997845,
+   "answer": {
+    "type": "score",
+    "score": 1.0155,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0303,
+     "1": 0.9339,
+     "2": 0.0259,
+     "3": 0.0099
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-006": {
+   "decision": "1",
+   "argmax": "1",
+   "confidence": 0.8968,
+   "latency_ms": 79.8980429999574,
+   "answer": {
+    "type": "score",
+    "score": 1.0289,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0417,
+     "1": 0.8968,
+     "2": 0.0524,
+     "3": 0.0091
+    },
+    "confidence": 0.9628
+   }
+  },
+  "dtr_compliance_risk-007": {
+   "decision": "2",
+   "argmax": "2",
+   "confidence": 0.9461,
+   "latency_ms": 68.21133699986603,
+   "answer": {
+    "type": "score",
+    "score": 1.9951,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0015,
+     "1": 0.0271,
+     "2": 0.9461,
+     "3": 0.0252
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-008": {
+   "decision": "2",
+   "argmax": "2",
+   "confidence": 0.9182,
+   "latency_ms": 65.47084299972994,
+   "answer": {
+    "type": "score",
+    "score": 1.9689,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.005,
+     "1": 0.0489,
+     "2": 0.9182,
+     "3": 0.0279
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-009": {
+   "decision": "2",
+   "argmax": "2",
+   "confidence": 0.9185,
+   "latency_ms": 79.74079699988579,
+   "answer": {
+    "type": "score",
+    "score": 1.9773,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0032,
+     "1": 0.0472,
+     "2": 0.9185,
+     "3": 0.031
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-010": {
+   "decision": "3",
+   "argmax": "3",
+   "confidence": 0.9091,
+   "latency_ms": 68.36064299977807,
+   "answer": {
+    "type": "score",
+    "score": 2.9008,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.001,
+     "1": 0.0062,
+     "2": 0.0837,
+     "3": 0.9091
+    },
+    "confidence": 0.9897
+   }
+  },
+  "dtr_compliance_risk-011": {
+   "decision": "3",
+   "argmax": "3",
+   "confidence": 0.9223,
+   "latency_ms": 68.65413200011972,
+   "answer": {
+    "type": "score",
+    "score": 2.9155,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0011,
+     "1": 0.0046,
+     "2": 0.072,
+     "3": 0.9223
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_compliance_risk-012": {
+   "decision": "3",
+   "argmax": "3",
+   "confidence": 0.8526,
+   "latency_ms": 78.8834179998048,
+   "answer": {
+    "type": "score",
+    "score": 2.8479,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0006,
+     "1": 0.0037,
+     "2": 0.1431,
+     "3": 0.8526
+    },
+    "confidence": 0.9514
+   }
+  },
+  "dtr_compliance_risk-013": {
+   "decision": "3",
+   "argmax": "3",
+   "confidence": 0.8197,
+   "latency_ms": 74.99443200003952,
+   "answer": {
+    "type": "score",
+    "score": 2.8129,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0009,
+     "1": 0.005,
+     "2": 0.1744,
+     "3": 0.8197
+    },
+    "confidence": 0.9212
+   }
+  },
+  "dtr_compliance_risk-014": {
+   "decision": "3",
+   "argmax": "3",
+   "confidence": 0.9086,
+   "latency_ms": 68.62401099988347,
+   "answer": {
+    "type": "score",
+    "score": 2.8888,
+    "legend": {
+     "0": "Compliant: arrangement follows the DTR as described",
+     "1": "Documentation gap: allowed, but required documentation is missing",
+     "2": "Excess cost: allowed only with the traveler paying costs above the Government-authorized amount",
+     "3": "Prohibited: the DTR does not permit this arrangement"
+    },
+    "probabilities": {
+     "0": 0.0036,
+     "1": 0.0126,
+     "2": 0.0752,
+     "3": 0.9086
+    },
+    "confidence": 0.9446
+   }
+  },
+  "dtr_fare_eligibility-000": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 70.91713100044217,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_fare_eligibility-001": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.999,
+   "latency_ms": 72.09240199972555,
+   "answer": {
+    "type": "noul",
+    "noul": 0.001
+   }
+  },
+  "dtr_fare_eligibility-002": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9992,
+   "latency_ms": 70.26698899971962,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0008
+   }
+  },
+  "dtr_fare_eligibility-003": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9998,
+   "latency_ms": 71.47506000001158,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0002
+   }
+  },
+  "dtr_fare_eligibility-004": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9887,
+   "latency_ms": 70.21646900011547,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0113
+   }
+  },
+  "dtr_fare_eligibility-005": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 70.49812900004326,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_fare_eligibility-006": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5603,
+   "latency_ms": 72.1533470000395,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5603
+   }
+  },
+  "dtr_fare_eligibility-007": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5254,
+   "latency_ms": 70.8333509996919,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5254
+   }
+  },
+  "dtr_fare_eligibility-008": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 71.01098700013608,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_fare_eligibility-009": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9989,
+   "latency_ms": 72.33362299984947,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0011
+   }
+  },
+  "dtr_fare_eligibility-010": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9998,
+   "latency_ms": 71.71215100015615,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0002
+   }
+  },
+  "dtr_fare_eligibility-011": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9892,
+   "latency_ms": 70.1885379999112,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0108
+   }
+  },
+  "dtr_fare_eligibility-012": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 70.56309099971259,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_fare_eligibility-013": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5599,
+   "latency_ms": 71.81387500031633,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5599
+   }
+  },
+  "dtr_cpp_exception-000": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 73.04032799993365,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_cpp_exception-001": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 1.0,
+   "latency_ms": 73.22688500016739,
+   "answer": {
+    "type": "noul",
+    "noul": 1.0
+   }
+  },
+  "dtr_cpp_exception-002": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9997,
+   "latency_ms": 73.12859100011337,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9997
+   }
+  },
+  "dtr_cpp_exception-003": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9992,
+   "latency_ms": 72.26269099965066,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0008
+   }
+  },
+  "dtr_cpp_exception-004": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9997,
+   "latency_ms": 73.19605299971954,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0003
+   }
+  },
+  "dtr_cpp_exception-005": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9994,
+   "latency_ms": 72.05061400009072,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0006
+   }
+  },
+  "dtr_cpp_exception-006": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5352,
+   "latency_ms": 73.17064199969536,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5352
+   }
+  },
+  "dtr_cpp_exception-007": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.6086,
+   "latency_ms": 72.53832099968349,
+   "answer": {
+    "type": "noul",
+    "noul": 0.6086
+   }
+  },
+  "dtr_cpp_exception-008": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 73.75912299994525,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_cpp_exception-009": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 1.0,
+   "latency_ms": 72.85121099994285,
+   "answer": {
+    "type": "noul",
+    "noul": 1.0
+   }
+  },
+  "dtr_cpp_exception-010": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9997,
+   "latency_ms": 72.98078599978908,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9997
+   }
+  },
+  "dtr_cpp_exception-011": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9994,
+   "latency_ms": 71.81174500010457,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0006
+   }
+  },
+  "dtr_cpp_exception-012": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9997,
+   "latency_ms": 72.77989900012471,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0003
+   }
+  },
+  "dtr_cpp_exception-013": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9995,
+   "latency_ms": 72.2267500000271,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0005
+   }
+  },
+  "dtr_foreign_carrier-000": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 68.35738400013724,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_foreign_carrier-001": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9993,
+   "latency_ms": 68.69438600006106,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0007
+   }
+  },
+  "dtr_foreign_carrier-002": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9978,
+   "latency_ms": 68.12451600035274,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0022
+   }
+  },
+  "dtr_foreign_carrier-003": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 68.70868599980895,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_foreign_carrier-004": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 1.0,
+   "latency_ms": 68.64827400022477,
+   "answer": {
+    "type": "noul",
+    "noul": 1.0
+   }
+  },
+  "dtr_foreign_carrier-005": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 1.0,
+   "latency_ms": 68.64345399981175,
+   "answer": {
+    "type": "noul",
+    "noul": 1.0
+   }
+  },
+  "dtr_foreign_carrier-006": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9984,
+   "latency_ms": 68.52770000023156,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0016
+   }
+  },
+  "dtr_foreign_carrier-007": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5778,
+   "latency_ms": 68.24514000027193,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5778
+   }
+  },
+  "dtr_foreign_carrier-008": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5306,
+   "latency_ms": 68.66646499975104,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5306
+   }
+  },
+  "dtr_foreign_carrier-009": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9991,
+   "latency_ms": 69.43418199989537,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0009
+   }
+  },
+  "dtr_foreign_carrier-010": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9981,
+   "latency_ms": 67.70112100002734,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0019
+   }
+  },
+  "dtr_foreign_carrier-011": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 68.20115799973792,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_foreign_carrier-012": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 1.0,
+   "latency_ms": 68.21124799989775,
+   "answer": {
+    "type": "noul",
+    "noul": 1.0
+   }
+  },
+  "dtr_foreign_carrier-013": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 1.0,
+   "latency_ms": 67.67467100007707,
+   "answer": {
+    "type": "noul",
+    "noul": 1.0
+   }
+  },
+  "dtr_contractor_airlift-000": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 66.32064199993692,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_contractor_airlift-001": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9865,
+   "latency_ms": 66.72408699978405,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0135
+   }
+  },
+  "dtr_contractor_airlift-002": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9286,
+   "latency_ms": 66.33300300018163,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0714
+   }
+  },
+  "dtr_contractor_airlift-003": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9754,
+   "latency_ms": 67.03768699981083,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0246
+   }
+  },
+  "dtr_contractor_airlift-004": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 68.16017699975419,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_contractor_airlift-005": {
+   "decision": "abstain",
+   "argmax": "false",
+   "confidence": 0.5539000000000001,
+   "latency_ms": 65.96475000014834,
+   "answer": {
+    "type": "noul",
+    "noul": 0.4461
+   }
+  },
+  "dtr_contractor_airlift-006": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 67.42495099979351,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_contractor_airlift-007": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9867,
+   "latency_ms": 66.79755899995143,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0133
+   }
+  },
+  "dtr_booking_policy-000": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9985,
+   "latency_ms": 68.47198799960097,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0015
+   }
+  },
+  "dtr_booking_policy-001": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 68.91976400038402,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_booking_policy-002": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9991,
+   "latency_ms": 69.3313679998937,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0009
+   }
+  },
+  "dtr_booking_policy-003": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9988,
+   "latency_ms": 68.36260399995808,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0012
+   }
+  },
+  "dtr_booking_policy-004": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 66.5087389998007,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_booking_policy-005": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.611,
+   "latency_ms": 67.00692600043112,
+   "answer": {
+    "type": "noul",
+    "noul": 0.611
+   }
+  },
+  "dtr_booking_policy-006": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9987,
+   "latency_ms": 66.75511799994638,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0013
+   }
+  },
+  "dtr_booking_policy-007": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 68.16643799993471,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_booking_policy-008": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9994,
+   "latency_ms": 67.11155000039071,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0006
+   }
+  },
+  "dtr_booking_policy-009": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9989,
+   "latency_ms": 67.26844600007098,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0011
+   }
+  },
+  "dtr_booking_policy-010": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 67.36282900010337,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_booking_policy-011": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9984,
+   "latency_ms": 66.8221710002399,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0016
+   }
+  },
+  "dtr_rental_use-000": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9997,
+   "latency_ms": 66.99837599990133,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9997
+   }
+  },
+  "dtr_rental_use-001": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9967,
+   "latency_ms": 66.77419900006498,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9967
+   }
+  },
+  "dtr_rental_use-002": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9991,
+   "latency_ms": 66.53602000005776,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9991
+   }
+  },
+  "dtr_rental_use-003": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9995,
+   "latency_ms": 67.124831000001,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9995
+   }
+  },
+  "dtr_rental_use-004": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.757,
+   "latency_ms": 69.00639600007707,
+   "answer": {
+    "type": "noul",
+    "noul": 0.243
+   }
+  },
+  "dtr_rental_use-005": {
+   "decision": "abstain",
+   "argmax": "false",
+   "confidence": 0.7401,
+   "latency_ms": 68.23305999978402,
+   "answer": {
+    "type": "noul",
+    "noul": 0.2599
+   }
+  },
+  "dtr_rental_use-006": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.7907,
+   "latency_ms": 66.21705899988228,
+   "answer": {
+    "type": "noul",
+    "noul": 0.2093
+   }
+  },
+  "dtr_rental_use-007": {
+   "decision": "abstain",
+   "argmax": "false",
+   "confidence": 0.5778,
+   "latency_ms": 64.60754299996552,
+   "answer": {
+    "type": "noul",
+    "noul": 0.4222
+   }
+  },
+  "dtr_rental_use-008": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9996,
+   "latency_ms": 64.14360700000543,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9996
+   }
+  },
+  "dtr_rental_use-009": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9995,
+   "latency_ms": 66.27816099990014,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9995
+   }
+  },
+  "dtr_rental_use-010": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9988,
+   "latency_ms": 66.81171899981564,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9988
+   }
+  },
+  "dtr_rental_use-011": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9995,
+   "latency_ms": 64.01394100021207,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9995
+   }
+  },
+  "dtr_ship_travel-000": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 67.18270300007134,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_ship_travel-001": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9954,
+   "latency_ms": 68.78502900008243,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0046
+   }
+  },
+  "dtr_ship_travel-002": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.6461,
+   "latency_ms": 68.22197900009996,
+   "answer": {
+    "type": "noul",
+    "noul": 0.6461
+   }
+  },
+  "dtr_ship_travel-003": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 67.62468900024032,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_ship_travel-004": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9969,
+   "latency_ms": 67.6909799999521,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0031
+   }
+  },
+  "dtr_ship_travel-005": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 1.0,
+   "latency_ms": 67.44635299992296,
+   "answer": {
+    "type": "noul",
+    "noul": 1.0
+   }
+  },
+  "dtr_ship_travel-006": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5214,
+   "latency_ms": 69.45657300002495,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5214
+   }
+  },
+  "dtr_ship_travel-007": {
+   "decision": "false",
+   "argmax": "false",
+   "confidence": 0.9959,
+   "latency_ms": 70.12834499983,
+   "answer": {
+    "type": "noul",
+    "noul": 0.0041
+   }
+  },
+  "dtr_ship_travel-008": {
+   "decision": "abstain",
+   "argmax": "true",
+   "confidence": 0.5959,
+   "latency_ms": 69.89935799992963,
+   "answer": {
+    "type": "noul",
+    "noul": 0.5959
+   }
+  },
+  "dtr_ship_travel-009": {
+   "decision": "true",
+   "argmax": "true",
+   "confidence": 0.9999,
+   "latency_ms": 69.206973999826,
+   "answer": {
+    "type": "noul",
+    "noul": 0.9999
+   }
+  },
+  "dtr_provision_routing-000": {
+   "decision": "102.A",
+   "argmax": "102.A",
+   "confidence": 1.0,
+   "latency_ms": 68.5879620000378,
+   "answer": {
+    "type": "choice",
+    "choice": "102.A",
+    "probabilities": {
+     "102.A": 1.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 0.9999
+   }
+  },
+  "dtr_provision_routing-001": {
+   "decision": "102.C",
+   "argmax": "102.C",
+   "confidence": 1.0,
+   "latency_ms": 68.83386100025746,
+   "answer": {
+    "type": "choice",
+    "choice": "102.C",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 1.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-002": {
+   "decision": "106.B",
+   "argmax": "106.B",
+   "confidence": 1.0,
+   "latency_ms": 68.2002690000445,
+   "answer": {
+    "type": "choice",
+    "choice": "106.B",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 1.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-003": {
+   "decision": "103.E",
+   "argmax": "103.E",
+   "confidence": 1.0,
+   "latency_ms": 67.54088499974387,
+   "answer": {
+    "type": "choice",
+    "choice": "103.E",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 1.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-004": {
+   "decision": "103.E",
+   "argmax": "103.E",
+   "confidence": 1.0,
+   "latency_ms": 69.17594299966368,
+   "answer": {
+    "type": "choice",
+    "choice": "103.E",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 1.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-005": {
+   "decision": "103.F",
+   "argmax": "103.F",
+   "confidence": 1.0,
+   "latency_ms": 68.88103199980833,
+   "answer": {
+    "type": "choice",
+    "choice": "103.F",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 1.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-006": {
+   "decision": "103.N",
+   "argmax": "103.N",
+   "confidence": 1.0,
+   "latency_ms": 66.99781700035601,
+   "answer": {
+    "type": "choice",
+    "choice": "103.N",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 1.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-007": {
+   "decision": "102.B",
+   "argmax": "102.B",
+   "confidence": 1.0,
+   "latency_ms": 68.28882099989642,
+   "answer": {
+    "type": "choice",
+    "choice": "102.B",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 1.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-008": {
+   "decision": "102.A",
+   "argmax": "102.A",
+   "confidence": 1.0,
+   "latency_ms": 68.12817599984555,
+   "answer": {
+    "type": "choice",
+    "choice": "102.A",
+    "probabilities": {
+     "102.A": 1.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-009": {
+   "decision": "102.C",
+   "argmax": "102.C",
+   "confidence": 1.0,
+   "latency_ms": 69.40655099970172,
+   "answer": {
+    "type": "choice",
+    "choice": "102.C",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 1.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-010": {
+   "decision": "102.A",
+   "argmax": "102.A",
+   "confidence": 1.0,
+   "latency_ms": 68.48762899971916,
+   "answer": {
+    "type": "choice",
+    "choice": "102.A",
+    "probabilities": {
+     "102.A": 1.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-011": {
+   "decision": "103.E",
+   "argmax": "103.E",
+   "confidence": 1.0,
+   "latency_ms": 71.22674399988682,
+   "answer": {
+    "type": "choice",
+    "choice": "103.E",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 1.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-012": {
+   "decision": "103.E",
+   "argmax": "103.E",
+   "confidence": 1.0,
+   "latency_ms": 69.09013999984381,
+   "answer": {
+    "type": "choice",
+    "choice": "103.E",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 1.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-013": {
+   "decision": "103.F",
+   "argmax": "103.F",
+   "confidence": 1.0,
+   "latency_ms": 72.0464930000162,
+   "answer": {
+    "type": "choice",
+    "choice": "103.F",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 1.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-014": {
+   "decision": "103.N",
+   "argmax": "103.N",
+   "confidence": 1.0,
+   "latency_ms": 68.7757480000073,
+   "answer": {
+    "type": "choice",
+    "choice": "103.N",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 0.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 1.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  },
+  "dtr_provision_routing-015": {
+   "decision": "102.K",
+   "argmax": "102.K",
+   "confidence": 1.0,
+   "latency_ms": 68.49018799994155,
+   "answer": {
+    "type": "choice",
+    "choice": "102.K",
+    "probabilities": {
+     "102.A": 0.0,
+     "102.B": 0.0,
+     "102.C": 0.0,
+     "102.J": 0.0,
+     "102.K": 1.0,
+     "103.E": 0.0,
+     "103.F": 0.0,
+     "103.N": 0.0,
+     "106.B": 0.0,
+     "107.A": 0.0
+    },
+    "confidence": 1.0
+   }
+  }
+ }
+}
