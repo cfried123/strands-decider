@@ -1,0 +1,19 @@
+# DTR Part I domain fine-tune, continued from the released v21 checkpoint.
+# Build data first (see training/dtr/README.md). Chapters 106/107 tasks are held out.
+finetune_from: StrandsAgents/strands-decider-2B-hobson-v21
+base_model: Qwen/Qwen3.5-2B-Base
+use_lora: true
+lr: 5.0e-5
+head_lr: 5.0e-4
+shuffle_options: true
+ema_decay: 0.99
+ordinal_smoothing: 0.1
+epochs: 1
+micro_batch_size: 4
+grad_accum: 4
+max_length: 1536
+train_files: [data/dtr/train.jsonl]
+val_files: [data/dtr/train.holdout.jsonl]
+eval_every: 50
+log_every: 5
+output_dir: checkpoints/dtr-ft
