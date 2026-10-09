@@ -1128,11 +1128,24 @@ def catalog() -> dict:
             "section": sections[task],
             "dtr_citation": cite,
             "dtr_excerpt": text,
+            "provisions": [
+                {"section": sec, "dtr_citation": EXCERPTS[sec][0], "dtr_excerpt": EXCERPTS[sec][1]}
+                for sec in provisions_for(task, default=sections[task])
+            ],
             "question": question_for(fam),
             "option_names": [o for o, _ in options_for(fam)],
             "holdout": task in HOLDOUT_TASKS,
         }
     return {"source": SOURCE, "tasks": out}
+
+
+def provisions_for(task: str, *, default: str, draws: int = 500) -> list[str]:
+    """Every section `task`'s scenarios can be governed by, `default` first. Some
+    determinations span paragraphs (booking policy: 102.B and 102.K), and the decider must
+    see the excerpt it was trained on for that scenario."""
+    ctx = Ctx(half=1, rng=random.Random(f"{task}:provisions"))
+    found = {FAMILIES[task].gen(ctx).section for _ in range(draws)}
+    return [default, *sorted(found - {default})]
 
 
 def main(argv: list[str] | None = None) -> None:

@@ -76,3 +76,14 @@ def test_score_counts_correct_abstentions():
     assert m["strict_accuracy"] == 1.0
     assert m["abstain_recall"] == 1.0
     assert m["coverage"] == 1.0
+
+
+def test_catalog_provisions_cover_every_bench_citation():
+    cat = dtr.catalog()["tasks"]
+    for it in dtr.bench_items():
+        if it["task"] not in cat:
+            continue
+        cites = {p["dtr_citation"] for p in cat[it["task"]]["provisions"]}
+        assert it["state"]["dtr_citation"] in cites, it["item_id"]
+    booking = [p["section"] for p in cat["dtr_booking_policy"]["provisions"]]
+    assert booking[0] == cat["dtr_booking_policy"]["section"] and "102.B" in booking
