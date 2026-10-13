@@ -39,6 +39,9 @@ class RecipeSpec:
     # into one split (RuleTaker carries every reasoning depth in `config`), and
     # filtering after truncation would leave a fraction of the requested count.
     row_filter: Callable[[Any], bool] | None = None
+    # Generated locally (no HF download): the converter receives `None` for rows and
+    # `limit` for the example count.
+    local: bool = False
 
 
 # Smallest option list we will cut a large label set down to. Below this the task
@@ -115,9 +118,7 @@ def _choice_from_labelled(
     out: list[Example] = []
     for row in ds:
         gold = int(row[label_column])
-        opts, new_gold = _subsample_options(
-            [list(o) for o in canonical], gold, max_options, rng
-        )
+        opts, new_gold = _subsample_options([list(o) for o in canonical], gold, max_options, rng)
         out.append(
             Example(
                 kind="choice",
@@ -155,9 +156,7 @@ def _choice_from_string_labels(
     out: list[Example] = []
     for row in ds:
         gold = index[str(row[label_column])]
-        opts, new_gold = _subsample_options(
-            [list(o) for o in canonical], gold, max_options, rng
-        )
+        opts, new_gold = _subsample_options([list(o) for o in canonical], gold, max_options, rng)
         out.append(
             Example(
                 kind="choice",
@@ -222,7 +221,6 @@ def _noul_from_claim_evidence(
     return out
 
 
-
 def _noul_from_pair(
     ds: Iterable[dict],
     *,
@@ -255,7 +253,6 @@ def _noul_from_pair(
             )
         )
     return out
-
 
 
 def _score_from_ordinal(
@@ -338,9 +335,7 @@ def _noul_from_entailment(
             Example(
                 kind="noul",
                 state=_clip(row["premise"], max_chars),
-                instructions=instructions_template.format(
-                    hypothesis=_clip(row["hypothesis"], 400)
-                ),
+                instructions=instructions_template.format(hypothesis=_clip(row["hypothesis"], 400)),
                 options=[
                     ["false", "the state does not support the statement"],
                     ["true", "the state supports the statement"],
@@ -352,9 +347,7 @@ def _noul_from_entailment(
     return out
 
 
-def _rank_levels(
-    values: Sequence[float], n_levels: int, dead_zone: float
-) -> list[tuple]:
+def _rank_levels(values: Sequence[float], n_levels: int, dead_zone: float) -> list[tuple]:
     """Assign ordinal levels by quantile rank, dropping points that sit near a cut.
 
     Quantile binning rather than fixed thresholds: these scores (formality, aggregated
@@ -521,7 +514,6 @@ def _noul_from_passage_question(
             )
         )
     return out
-
 
 
 # --------------------------------------------------------------------------------
@@ -703,9 +695,7 @@ register(
 )
 
 register(
-    RecipeSpec(
-        "massive_intent", "mteb/amazon_massive_intent", config="en", max_examples=6000
-    ),
+    RecipeSpec("massive_intent", "mteb/amazon_massive_intent", config="en", max_examples=6000),
     lambda ds, *, max_options, max_chars, rng: _choice_from_string_labels(
         ds,
         task="massive_intent",
@@ -801,7 +791,6 @@ register(
         max_chars=max_chars,
     ),
 )
-
 
 
 # --------------------------------------------------------------------------------
@@ -921,9 +910,7 @@ register(
 )
 
 register(
-    RecipeSpec(
-        "yahoo_topics", "community-datasets/yahoo_answers_topics", max_examples=4000
-    ),
+    RecipeSpec("yahoo_topics", "community-datasets/yahoo_answers_topics", max_examples=4000),
     lambda ds, *, max_options, max_chars, rng: _choice_from_labelled(
         ds,
         task="yahoo_topics",
@@ -962,7 +949,6 @@ register(
         max_chars=max_chars,
     ),
 )
-
 
 
 # --------------------------------------------------------------------------------
@@ -1089,7 +1075,6 @@ register(
 )
 
 
-
 # --------------------------------------------------------------------------------
 # Noul breadth. The original four covered logical entailment, two content properties
 # and factual QA over a passage -- narrow for a primitive meant to answer arbitrary
@@ -1101,8 +1086,7 @@ register(
 
 register(
     # semantic equivalence -- adversarial, so high word overlap does not imply agreement
-    RecipeSpec("paws", "google-research-datasets/paws", config="labeled_final",
-               max_examples=5000),
+    RecipeSpec("paws", "google-research-datasets/paws", config="labeled_final", max_examples=5000),
     lambda ds, *, max_options, max_chars, rng: _noul_from_claim_evidence(
         ds,
         task="paws",
@@ -1190,7 +1174,6 @@ register(
 )
 
 
-
 # --------------------------------------------------------------------------------
 # RuleTaker: apply a stated ruleset to a case.
 #
@@ -1224,6 +1207,7 @@ _RULETAKER_TEMPLATES = [
 def _ruletaker(name: str, config_value: str, n: int) -> None:
     def row_filter(r: Mapping[str, Any]) -> bool:
         return bool(r["config"] == config_value)
+
     register(
         RecipeSpec(
             name,
@@ -1266,13 +1250,19 @@ def build_recipe(
     seed: int = 0,
     max_examples: int | None = None,
 ) -> list[Example]:
-    """Load one dataset and convert it. Requires `datasets` and network access."""
-    from datasets import load_dataset
-
+    """Load one dataset and convert it. Requires `datasets` and network access,
+    except for `local` recipes, which generate their examples in-process."""
     if name not in SPECS:
         raise KeyError(f"unknown recipe {name!r}; known: {sorted(SPECS)}")
     spec = SPECS[name]
     rng = random.Random(seed)
+    if spec.local:
+        limit = max_examples if max_examples is not None else spec.max_examples
+        return RECIPES[name](
+            None, max_options=max_options, max_chars=max_chars, rng=rng, limit=limit, seed=seed
+        )
+
+    from datasets import load_dataset
 
     ds = load_dataset(
         spec.path,
@@ -1305,3 +1295,17 @@ def build_recipe(
 
 def available_recipes() -> list[str]:
     return sorted(SPECS)
+
+
+def _register_dtr() -> None:
+    from . import dtr
+
+    for task in dtr.ALL_TASKS:
+
+        def convert(_rows, *, limit: int, seed: int = 0, task: str = task, **_kw):
+            return dtr.generate(task, limit, seed=seed)
+
+        register(RecipeSpec(name=task, path="local:dtr", max_examples=400, local=True), convert)
+
+
+_register_dtr()

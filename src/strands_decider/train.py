@@ -102,6 +102,10 @@ class TrainConfig:
     # drops the adapter and freezes the *base* torso, which would train the new head
     # against unadapted features and silently measure the wrong thing.
     init_from: str | None = None
+    # Continue training a finished checkpoint: its adapter stays trainable and its head
+    # is kept, so a domain fine-tune (e.g. DTR) starts from the released model rather
+    # than from the base torso. Stored calibration is reset; recalibrate afterwards.
+    finetune_from: str | None = None
 
     # optimisation
     epochs: int = 1
@@ -162,7 +166,7 @@ def _random_batches(n: int, cfg: TrainConfig) -> list[list[int]]:
     order = list(range(n))
     random.Random(cfg.seed).shuffle(order)
     b = cfg.micro_batch_size
-    return [order[i:i + b] for i in range(0, n - n % b, b)]
+    return [order[i : i + b] for i in range(0, n - n % b, b)]
 
 
 class ExampleDataset(Dataset):
@@ -276,9 +280,14 @@ def evaluate_loss(
 FROZEN_PASS_TOKENS = 32768
 
 
-def _frozen_reference(model: StrandsDeciderModel, examples: list[Example], batches: list[list[int]],
-                      coll_cfg: CollatorConfig, device: str,
-                      ref_model: StrandsDeciderModel | None = None) -> torch.Tensor:
+def _frozen_reference(
+    model: StrandsDeciderModel,
+    examples: list[Example],
+    batches: list[list[int]],
+    coll_cfg: CollatorConfig,
+    device: str,
+    ref_model: StrandsDeciderModel | None = None,
+) -> torch.Tensor:
     """`frozen_slot_log_probs` for every row the run trains on: ref[micro-batch, row].
 
     A fresh collator with the training collator's seed walks the run's micro-batches in
@@ -300,8 +309,7 @@ def _frozen_reference(model: StrandsDeciderModel, examples: list[Example], batch
     rank, _, world = distributed.env()
     tok = model.tokenizer if ref_model is None else ref_model.tokenizer
     coll = SystemOneCollator(tok, coll_cfg, train=True)
-    ref = torch.zeros(len(batches), max(map(len, batches)), model.config.num_slots,
-                      device=device)
+    ref = torch.zeros(len(batches), max(map(len, batches)), model.config.num_slots, device=device)
     todo: list[Any] = []  # (micro-batch, row, token ids, option count)
     for m, idx in enumerate(batches):
         rows = [examples[i] for i in idx]
@@ -311,10 +319,13 @@ def _frozen_reference(model: StrandsDeciderModel, examples: list[Example], batch
         b = coll(rows)
         if ref_model is not None:
             with torch.no_grad():
-                lp = ref_model(input_ids=b["input_ids"].to(device),
-                               attention_mask=b["attention_mask"].to(device),
-                               n_slots=b["n_slots"].to(device), opt_idx=b["opt_idx"].to(device)
-                               if "opt_idx" in b else None, temperature=1.0)["log_probs"]
+                lp = ref_model(
+                    input_ids=b["input_ids"].to(device),
+                    attention_mask=b["attention_mask"].to(device),
+                    n_slots=b["n_slots"].to(device),
+                    opt_idx=b["opt_idx"].to(device) if "opt_idx" in b else None,
+                    temperature=1.0,
+                )["log_probs"]
             w = min(lp.shape[-1], ref.shape[-1])
             ref[m, : len(rows)] = float("-inf")
             ref[m, : len(rows), :w] = lp[:, :w]
@@ -326,7 +337,7 @@ def _frozen_reference(model: StrandsDeciderModel, examples: list[Example], batch
     i = 0
     while i < len(todo):
         longest = todo[i][2].numel()
-        chunk = todo[i:i + max(1, FROZEN_PASS_TOKENS // longest)]
+        chunk = todo[i : i + max(1, FROZEN_PASS_TOKENS // longest)]
         i += len(chunk)
         ts = [t for _, _, t, _ in chunk]  # right padding, as the collator pads
         ids = pad_sequence(ts, batch_first=True, padding_value=model.tokenizer.pad_token_id)
@@ -340,8 +351,13 @@ def _frozen_reference(model: StrandsDeciderModel, examples: list[Example], batch
     return ref
 
 
-def _kl(target: torch.Tensor, student: torch.Tensor, valid: torch.Tensor, direction: str,
-        target_probs: torch.Tensor | None = None) -> torch.Tensor:
+def _kl(
+    target: torch.Tensor,
+    student: torch.Tensor,
+    valid: torch.Tensor,
+    direction: str,
+    target_probs: torch.Tensor | None = None,
+) -> torch.Tensor:
     """Per-row KL between two log-distributions over the `valid` entries: forward =
     KL(target || student), reverse = KL(student || target). `target_probs`, when the caller
     has them, weight the forward sum in place of exp(target)."""
@@ -426,13 +442,29 @@ def train(cfg: TrainConfig) -> str:
             dropout=cfg.head_dropout,
         ).to(torch.float32)
         model.freeze_torso()
+    elif cfg.finetune_from:
+        print(f"[strands-decider] continuing training from {cfg.finetune_from}")
+        model = StrandsDeciderModel.load(
+            cfg.finetune_from, attn_implementation=cfg.attn_implementation, trainable=True
+        )
+        model.config.ordinal_smoothing = cfg.ordinal_smoothing
+        model.config.temperature = 1.0
+        model.config.temperature_by_kind = {}
+        # The collator must build batches for the loaded head, not the config defaults.
+        for key in ("num_slots", "head_type", "pointer_dim", "force_bos", "host_embeddings"):
+            setattr(cfg, key, getattr(model.config, key))
+        model.head.train()
+        for p in model.head.parameters():
+            p.requires_grad_(True)
     else:
         model = StrandsDeciderModel.from_pretrained_base(
             model_cfg, attn_implementation=cfg.attn_implementation
         )
         if cfg.freeze_torso:
             model.freeze_torso()
-    if cfg.head_init == "lm_head":
+    if cfg.finetune_from:
+        pass  # keep the trained head
+    elif cfg.head_init == "lm_head":
         seeded = model.init_head_from_lm_head()
         print(f"[strands-decider] head seeded from lm_head rows for {seeded} slots")
     elif cfg.head_init != "random":
@@ -464,17 +496,22 @@ def train(cfg: TrainConfig) -> str:
                 d = json.loads(line)
                 ex = train_examples[d["i"]]
                 if len(d["probs"]) != ex.n_options:
-                    raise ValueError(f"teacher row {d['i']} has {len(d['probs'])} probs for "
-                                     f"{ex.n_options} options -- wrong train_files?")
+                    raise ValueError(
+                        f"teacher row {d['i']} has {len(d['probs'])} probs for "
+                        f"{ex.n_options} options -- wrong train_files?"
+                    )
                 ex.teacher = d["probs"]
                 n_t += 1
-        print(f"[strands-decider] teacher distributions on {n_t:,} of {len(train_examples):,} rows "
-              f"(weight {cfg.teacher_weight})")
+        print(
+            f"[strands-decider] teacher distributions on {n_t:,} of {len(train_examples):,} rows "
+            f"(weight {cfg.teacher_weight})"
+        )
     if cfg.val_files:
         val_examples = load_examples(cfg.val_files)
     else:
         train_examples, val_examples = split_examples(
-            train_examples, val_fraction=cfg.val_fraction,
+            train_examples,
+            val_fraction=cfg.val_fraction,
             seed=cfg.seed if cfg.val_split_seed is None else cfg.val_split_seed,
         )
     if cfg.kl_only_files:
@@ -508,18 +545,23 @@ def train(cfg: TrainConfig) -> str:
     if cfg.group_by_length:
         lengths = [example_length(ex) for ex in train_examples]
         sampler = LengthGroupedBatchSampler(
-            lengths, cfg.micro_batch_size, mega=cfg.length_group_mega,
-            seed=cfg.seed, drop_last=True,
+            lengths,
+            cfg.micro_batch_size,
+            mega=cfg.length_group_mega,
+            seed=cfg.seed,
+            drop_last=True,
         )
         # Measured in prompt characters, the proxy the sampler sorts by -- which flatters
         # the grouped figure, since grouping is exact in that unit. Tables and prose
         # tokenise at different rates, so real token padding is higher (measured ~16%
         # grouped against ~58% ungrouped on the v10 corpus). The ungrouped figure agrees
         # in both units, so the comparison is still a fair signal of what was saved.
-        print(f"[strands-decider] length-grouped batching: padding "
-              f"{padding_fraction(lengths, sampler.batches(0)):.1%} of positions grouped vs "
-              f"{padding_fraction(lengths, _random_batches(len(lengths), cfg)):.1%} "
-              f"ungrouped (in prompt characters; token padding runs higher)")
+        print(
+            f"[strands-decider] length-grouped batching: padding "
+            f"{padding_fraction(lengths, sampler.batches(0)):.1%} of positions grouped vs "
+            f"{padding_fraction(lengths, _random_batches(len(lengths), cfg)):.1%} "
+            f"ungrouped (in prompt characters; token padding runs higher)"
+        )
         train_loader = DataLoader(
             ExampleDataset(train_examples),
             batch_sampler=sampler,
@@ -547,9 +589,7 @@ def train(cfg: TrainConfig) -> str:
     warmup = max(1, int(total_steps * cfg.warmup_ratio))
 
     optim = _build_optimizer(model, cfg)
-    sched = torch.optim.lr_scheduler.LambdaLR(
-        optim, lambda s: _lr_lambda(s, warmup, total_steps)
-    )
+    sched = torch.optim.lr_scheduler.LambdaLR(optim, lambda s: _lr_lambda(s, warmup, total_steps))
 
     if rank == 0:
         os.makedirs(cfg.output_dir, exist_ok=True)
@@ -569,19 +609,25 @@ def train(cfg: TrainConfig) -> str:
         model.train()  # the mode the in-step reference forward runs in
         ref_model = None
         if cfg.kl_frozen_reference:
-            ref_model = StrandsDeciderModel.load(cfg.kl_frozen_reference,
-                                                 attn_implementation=cfg.attn_implementation)
+            ref_model = StrandsDeciderModel.load(
+                cfg.kl_frozen_reference, attn_implementation=cfg.attn_implementation
+            )
             ref_model.to(device).eval()
             own = ref_model.tokenizer.get_vocab() == model.tokenizer.get_vocab()
-            print(f"[strands-decider] frozen-KL reference: {cfg.kl_frozen_reference}"
-                  + ("" if own else " (its own tokenizer, not the student's)"))
-        refs = _frozen_reference(model, train_examples, run[: total_steps * cfg.grad_accum],
-                                 coll_cfg, device, ref_model)
+            print(
+                f"[strands-decider] frozen-KL reference: {cfg.kl_frozen_reference}"
+                + ("" if own else " (its own tokenizer, not the student's)")
+            )
+        refs = _frozen_reference(
+            model, train_examples, run[: total_steps * cfg.grad_accum], coll_cfg, device, ref_model
+        )
         del ref_model
         if device == "cuda":
             torch.cuda.empty_cache()
-        print(f"[strands-decider] frozen-KL reference for {refs.shape[0]:,} micro-batches "
-              f"in {time.time() - t_ref:.0f} s")
+        print(
+            f"[strands-decider] frozen-KL reference for {refs.shape[0]:,} micro-batches "
+            f"in {time.time() - t_ref:.0f} s"
+        )
 
     ema = _Ema(model, cfg.ema_decay) if cfg.ema_decay > 0 else None
     print(f"[strands-decider] {total_steps} optimizer steps (warmup {warmup})")
@@ -618,7 +664,7 @@ def train(cfg: TrainConfig) -> str:
                     )
                 else:  # the same numbers, computed before step 1 (_frozen_reference)
                     m, a = (part.micro, part.start) if world > 1 else (micro, 0)
-                    ref_lp = refs[m, a:a + batch["labels"].numel()]
+                    ref_lp = refs[m, a : a + batch["labels"].numel()]
                     eligible = batch["n_slots"] <= kl_slots
                 if ref_lp.numel() and bool(eligible.any()):
                     ref = ref_lp[eligible]
@@ -643,7 +689,11 @@ def train(cfg: TrainConfig) -> str:
                     else:
                         step_loss = step_loss + cfg.kl_frozen_weight * kl
                     running_kl += float(kl)
-            if cfg.teacher_weight > 0 and "has_teacher" in batch and bool(batch["has_teacher"].any()):
+            if (
+                cfg.teacher_weight > 0
+                and "has_teacher" in batch
+                and bool(batch["has_teacher"].any())
+            ):
                 has = batch["has_teacher"]
                 stu = out["log_probs"][has]
                 tea = batch["teacher"][has][:, : stu.shape[-1]]
@@ -672,7 +722,8 @@ def train(cfg: TrainConfig) -> str:
 
             if step % cfg.log_every == 0:
                 running, running_kl, running_tkl = distributed.all_reduce(
-                    [running, running_kl, running_tkl])  # each rank holds its slices' part
+                    [running, running_kl, running_tkl]
+                )  # each rank holds its slices' part
                 avg = running / (cfg.log_every * cfg.grad_accum)
                 rate = step / max(1e-6, time.time() - t0)
                 mem = torch.cuda.max_memory_allocated() / 2**30 if device == "cuda" else 0.0
